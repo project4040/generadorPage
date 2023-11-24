@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page with A4 Content</title>
+    <style>
+        body {
+            background-color: #f2f2f2; /* Gray background */
+            margin: 0; /* Remove default body margin */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Set to 100% of the viewport height */
+            overflow: hidden; /* Hide overflow content */
+        }
+
+        .cuadrado-a4 {
+            width: 80vmin; /* 80% of the minimum viewport dimension (width or height) */
+            height: 113.14vmin; /* A4 aspect ratio (297mm / 210mm * 80vmin) */
+            max-width: 210mm; /* Maximum width set to A4 size */
+            max-height: 297mm; /* Maximum height set to A4 size */
+            background-color: #ffffff; /* White color */
+            border: 1px solid #000; /* Optional black border */
+            position: relative; /* Position relative for absolute positioning inside */
+        }
+
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Cover the entire width of .cuadrado-a4 */
+            max-height: 50%; /* Adjust the logo size as needed */
+        }
+
+        .text {
+            position: absolute;
+            top: 35%; /* Adjust the distance below the image */
+            left: 50px; /* Adjust the left margin */
+            text-align: left; /* Align text to the left */
+            padding-right: 5px; /* Adjust spacing from the right */
+            font-family: "Times New Roman", Times, serif; /* Set font to Times New Roman */
+            width: 80%; /* Adjust the width as needed */
+            font-size: 15.6px;
+        }
+
+        .screenshot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #4285f4; /* Google Blue color */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="cuadrado-a4">
+        <img src="logo.png" alt="Logo" class="logo">
+        <div class="text" contenteditable="true" onclick="clearDefaultText()">
+            Type your text here...
+        </div>
+    </div>
+    <button class="screenshot-button" onclick="takeScreenshot()">Download Screenshot</button>
+
+    <script>
+        function clearDefaultText() {
+            const textDiv = document.querySelector('.text');
+            if (textDiv.innerText === 'Type your text here...') {
+                textDiv.innerText = '';
+            }
+        }
+
+        function takeScreenshot() {
+            html2canvas(document.querySelector(".cuadrado-a4")).then(canvas => {
+                let a = document.createElement("a");
+                a.href = canvas.toDataURL("image/png");
+                a.download = "screenshot.png";
+                a.click();
+            });
+        }
+    </script>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html>
