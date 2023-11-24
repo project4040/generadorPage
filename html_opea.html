@@ -41,7 +41,7 @@
             padding-right: 5px; /* Adjust spacing from the right */
             font-family: "Times New Roman", Times, serif; /* Set font to Times New Roman */
             width: 80%; /* Adjust the width as needed */
-            font-size: 97.5%;
+            font-size: 15.6px;
         }
 
         .screenshot-button {
@@ -59,7 +59,7 @@
 </head>
 <body>
     <div class="cuadrado-a4">
-        <img src="https://i.postimg.cc/Z5160twN/logo.png" alt="Logo" class="logo">
+        <img src="logo.png" alt="Logo" class="logo">
         <div class="text" contenteditable="true" onclick="clearDefaultText()">
             Type your text here...
         </div>
@@ -75,7 +75,7 @@
         }
 
         function takeScreenshot() {
-            html2canvas(document.querySelector(".cuadrado-a4")).then(canvas => {
+            html2canvas(document.body).then(canvas => {
                 let a = document.createElement("a");
                 a.href = canvas.toDataURL("image/png");
                 a.download = "screenshot.png";
